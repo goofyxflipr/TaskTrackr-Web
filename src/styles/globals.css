@@ -68,3 +68,28 @@
   }
 }
 
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    @apply px-4;
+  }
+}
+
+html {
+	box-sizing: border-box;
+	scroll-behavior: smooth;
+	scrollbar-width: none;
+}
+
+html, body, header, footer  {
+  transition: all .2s;
+	cursor: default;
+}

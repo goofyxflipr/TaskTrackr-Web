@@ -1,11 +1,11 @@
-import './globals.css'
+import "@/styles/globals.css"
+
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { Toaster } from "@/components/ui/toaster"
-import { ClerkProvider } from "@clerk/nextjs"
 import { fontMono, fontSans } from "@/lib/fonts"
 
 const inter = Inter({ subsets: ['latin'] })
@@ -22,24 +22,22 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <>
-      <ClerkProvider>
-        <html lang="en" suppressHydrationWarning>
-          <head />
-          <body
-            className={cn(
-              "min-h-screen bg-background font-sans antialiased",
-              fontSans.variable,
-              fontMono.variable
-            )}
-          >
-            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-              {children}
-              <TailwindIndicator />
-            </ThemeProvider>
-            <Toaster />
-          </body>
-        </html>
-      </ClerkProvider>
+      <html lang="en" suppressHydrationWarning>
+        <head />
+        <body
+          className={cn(
+            "min-h-screen bg-background font-sans antialiased",
+            fontSans.variable,
+            fontMono.variable
+          )}
+        >
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            {children}
+            <TailwindIndicator />
+          </ThemeProvider>
+          <Toaster />
+        </body>
+      </html>
     </>
   )
 }
