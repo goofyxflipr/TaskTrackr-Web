@@ -32,7 +32,7 @@ export default function DashboardPage() {
         aria-labelledby="featured-products-heading"
         className="space-y-6"
       >
-        <div className="flex items-center">
+        {/* <div className="flex items-center">
           <h2 className="flex-1 text-2xl font-medium sm:text-3xl">
             Featured products
           </h2>
@@ -49,11 +49,11 @@ export default function DashboardPage() {
             </div>
           </Link>
         </div>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"> */}
           {/* {allProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))} */}
-        </div>
+        {/* </div> */}
       </section>
     </div>
   )

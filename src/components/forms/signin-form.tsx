@@ -62,9 +62,9 @@ export function SignInForm() {
         }
       } catch (e) {
         console.log(e)
-        toast.message("Something went wrong", {
-          description: `${e}`,
-        })
+        // toast.message("Something went wrong", {
+        //   description: `${e}`,
+        // })
       }
     })
   }
