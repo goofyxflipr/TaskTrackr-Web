@@ -18,11 +18,5 @@ export const dashboardConfig: DashboardConfig = {
       icon: "user",
       items: [],
     },
-    {
-      title: "History",
-      href: "/dashboard/history",
-      icon: "history",
-      items: [],
-    },
   ],
 }
