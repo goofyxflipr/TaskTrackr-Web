@@ -9,11 +9,30 @@ export const authSchema = z.object({
     .min(8, {
       message: "Password must be at least 8 characters long",
     })
-    .max(100)
-    .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/, {
-      message:
-        "Password must contain at least 8 characters, one uppercase, one lowercase, one number and one special character",
+    // .max(100)
+    // .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/, {
+    //   message:
+    //     "Password must contain at least 8 characters, one uppercase, one lowercase, one number and one special character",
+    // }),
+})
+
+export const signupSchema = z.object({
+  first_name: z.string(),
+  last_name: z.string(),
+  email: z.string().email({
+    message: "Please enter a valid email address",
+  }),
+  password: z
+    .string()
+    .min(8, {
+      message: "Password must be at least 8 characters long",
     }),
+    // .max(100)
+    // .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/, {
+    //   message:
+    //     "Password must contain at least 8 characters, one uppercase, one lowercase, one number and one special character",
+    // }),
+  phone: z.string(),
 })
 
 export const verfifyEmailSchema = z.object({
@@ -33,7 +52,6 @@ export const resetPasswordSchema = z
   .object({
     password: authSchema.shape.password,
     confirmPassword: authSchema.shape.password,
-    code: verfifyEmailSchema.shape.code,
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match",

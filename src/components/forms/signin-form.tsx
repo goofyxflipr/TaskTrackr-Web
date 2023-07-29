@@ -1,13 +1,14 @@
 "use client"
 
 import * as React from "react"
-import { useRouter } from "next/navigation"
+import { redirect, useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import type { z } from "zod"
+import axios from "axios"
 
 import { authSchema } from "@/lib/validations/auth"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import {
   Form,
   FormControl,
@@ -19,12 +20,20 @@ import {
 import { Input } from "@/components/ui/input"
 import { Icons } from "@/components/icons"
 import { PasswordInput } from "@/components/password-input"
+import { env } from "@/env.mjs"
+import { AuthContext } from "@/context/auth-context"
+import { toast } from "sonner"
+import { Skeleton } from '@/components/ui/skeleton';
+import { cn } from "@/lib/utils"
 
 type Inputs = z.infer<typeof authSchema>
 
 export function SignInForm() {
-  const router = useRouter()
   const [isPending, startTransition] = React.useTransition()
+
+  const router = useRouter()
+  const authContext = React.useContext(AuthContext)
+  if (authContext.user) redirect("/")
 
   // react-hook-form
   const form = useForm<Inputs>({
@@ -36,13 +45,26 @@ export function SignInForm() {
   })
 
   function onSubmit(data: Inputs) {
-    // if (!isLoaded) return
-
     startTransition(async () => {
       try {
-        
-      } catch (e){
+        const response = await axios.post(env.NEXT_PUBLIC_API_URL + "/login", {
+          email: data.email,
+          password: data.password
+        }, {
+          headers: { 'Content-Type': 'application/json' }
+        });
+        if (response.status === 200) {
+          authContext.setIsAuth!(true)
+          authContext.setAccessToken!(response.data.access)
+          authContext.setRefreshToken!(response.data.refresh)
+          authContext.setUser!(response.data)
+          redirect(`${window.location.origin}`)
+        }
+      } catch (e) {
         console.log(e)
+        toast.message("Something went wrong", {
+          description: `${e}`,
+        })
       }
     })
   }
@@ -50,7 +72,7 @@ export function SignInForm() {
   return (
     <Form {...form}>
       <form
-        className="grid gap-4"
+        className="grid gap-4 w-80"
         onSubmit={(...args) => void form.handleSubmit(onSubmit)(...args)}
       >
         <FormField

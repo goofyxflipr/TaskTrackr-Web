@@ -1,9 +1,9 @@
 "use client"
+
 import { type Metadata } from "next"
 import Link from "next/link"
 import { redirect } from "next/navigation"
 import { env } from "@/env.mjs"
-// import { currentUser } from "@clerk/nextjs"
 
 import {
   Card,
@@ -14,18 +14,17 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { OAuthSignIn } from "@/components/auth/oauth-signin"
-import { SignInForm } from "@/components/forms/signin-form"
-// import { Shell } from "@/components/shells/shell"
+import { SignUpForm } from "@/components/forms/signup-form"
 import { AuthContext } from '../../../context/auth-context';
 import { useContext } from "react"
 
 // export const metadata: Metadata = {
 //   metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
-//   title: "Sign In",
-//   description: "Sign in to your account",
+//   title: "Sign Up",
+//   description: "Sign up for an account",
 // }
 
-export default function SignInPage() {
+export default function SignUpPage() {
   const authContext = useContext(AuthContext)
   if (authContext.user) redirect("/")
 
@@ -33,13 +32,13 @@ export default function SignInPage() {
     <div className="max-w-lg">
       <Card>
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl">Sign in</CardTitle>
+          <CardTitle className="text-2xl">Sign up</CardTitle>
           <CardDescription>
-            Sign in with email and password
+            Choose your preferred sign up method
           </CardDescription>
         </CardHeader>
         <CardContent className="grid gap-4">
-          {/* <OAuthSignIn />
+          <OAuthSignIn />
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
               <span className="w-full border-t" />
@@ -49,29 +48,20 @@ export default function SignInPage() {
                 Or continue with
               </span>
             </div>
-          </div> */}
-          <SignInForm />
+          </div>
+          <SignUpForm />
         </CardContent>
-        <CardFooter className="flex flex-wrap items-center justify-between gap-2">
+        <CardFooter>
           <div className="text-sm text-muted-foreground">
-            <span className="mr-1 hidden sm:inline-block">
-              Don&apos;t have an account?
-            </span>
+            Already have an account?{" "}
             <Link
-              aria-label="Sign up"
-              href="/signup"
+              aria-label="Sign in"
+              href="/signin"
               className="text-primary underline-offset-4 transition-colors hover:underline"
             >
-              Sign up
+              Sign in
             </Link>
           </div>
-          <Link
-            aria-label="Reset password"
-            href="/signin/reset-password"
-            className="text-sm text-primary underline-offset-4 transition-colors hover:underline"
-          >
-            Reset password
-          </Link>
         </CardFooter>
       </Card>
     </div>

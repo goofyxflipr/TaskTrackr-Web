@@ -93,3 +93,11 @@ html, body, header, footer  {
   transition: all .2s;
 	cursor: default;
 }
+
+body {
+	overflow-x: hidden;
+}
+
+body::-webkit-scrollbar{
+	display: none;
+}

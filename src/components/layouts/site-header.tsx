@@ -28,10 +28,10 @@ interface SiteHeaderProps {
 }
 
 export function SiteHeader({ user }: SiteHeaderProps) {
-  const initials = `${user?.firstName?.charAt(0) ?? ""} ${
-    user?.lastName?.charAt(0) ?? ""
+  const initials = `${user?.first_name?.charAt(0) ?? ""}${
+    user?.last_name?.charAt(0) ?? ""
   }`
-  const email = user?.primaryEmailAddressId
+  const email = user?.email
 
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background">
@@ -55,18 +55,18 @@ export function SiteHeader({ user }: SiteHeaderProps) {
                   >
                     <Avatar className="h-8 w-8">
                       <AvatarImage
-                        src={user.imageUrl}
-                        alt={user.username ?? ""}
+                        src={user.profileImageUrl}
+                        alt={user.first_name ?? ""}
                       />
-                      <AvatarFallback>{initials}</AvatarFallback>
+                      <AvatarFallback className="text-xs">{initials}</AvatarFallback>
                     </Avatar>
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-56" align="end" forceMount>
+                <DropdownMenuContent className="w-80" align="end" forceMount>
                   <DropdownMenuLabel className="font-normal">
                     <div className="flex flex-col space-y-1">
                       <p className="text-sm font-medium leading-none">
-                        {user.firstName} {user.lastName}
+                        {user.first_name} {user.last_name}
                       </p>
                       <p className="text-xs leading-none text-muted-foreground">
                         {email}
@@ -86,7 +86,7 @@ export function SiteHeader({ user }: SiteHeaderProps) {
                       </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
-                      <Link href="/dashboard/stores">
+                      <Link href="/dashboard">
                         <Icons.terminal
                           className="mr-2 h-4 w-4"
                           aria-hidden="true"
@@ -95,7 +95,7 @@ export function SiteHeader({ user }: SiteHeaderProps) {
                         <DropdownMenuShortcut>⌘D</DropdownMenuShortcut>
                       </Link>
                     </DropdownMenuItem>
-                    <DropdownMenuItem asChild disabled>
+                    {/* <DropdownMenuItem asChild disabled>
                       <Link href="/dashboard/settings">
                         <Icons.settings
                           className="mr-2 h-4 w-4"
@@ -104,7 +104,7 @@ export function SiteHeader({ user }: SiteHeaderProps) {
                         Settings
                         <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
                       </Link>
-                    </DropdownMenuItem>
+                    </DropdownMenuItem> */}
                   </DropdownMenuGroup>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem asChild>

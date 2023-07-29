@@ -31,6 +31,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
   const [refreshToken, setRefreshToken] = useState<string | null>(defaultState.refreshToken)
   const [user, setUser] = useState<User | null>(defaultState.user)
 
+  
+
   return (
     <>
       <html lang="en" suppressHydrationWarning>

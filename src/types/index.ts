@@ -27,22 +27,56 @@ export interface FooterItem {
   }[]
 }
 
+export type SidebarNavItem = NavItemWithChildren
+
 export type MainNavItem = NavItemWithOptionalChildren
 
-export declare class User {
-  readonly id: string;
-  readonly banned: boolean;
-  readonly createdAt: number;
-  readonly updatedAt: number;
-  readonly profileImageUrl: string;
-  readonly imageUrl: string;
-  readonly gender: string;
-  readonly birthday: string;
-  readonly primaryEmailAddressId: string | null;
-  readonly primaryPhoneNumberId: string | null;
-  readonly lastSignInAt: number | null;
-  readonly username: string | null;
-  readonly firstName: string | null;
-  readonly lastName: string | null;
-  constructor(id: string, banned: boolean, createdAt: number, updatedAt: number, profileImageUrl: string, imageUrl: string, gender: string, birthday: string, primaryEmailAddressId: string | null, primaryPhoneNumberId: string | null, lastSignInAt: number | null, username: string | null, firstName: string | null, lastName: string | null);
+export interface User {
+  _id: string,
+  first_name: string,
+  last_name: string,
+  email: string,
+  profileImageUrl: string | undefined,
+  phone: string | null,
+  organization: any | null,
+  lastSignInAt: number | null,
+  createdAt: number,
+  updatedAt: number,
+  banned: boolean,
+}
+
+export interface Project {
+  _id: string;
+  name: string;
+  uri: string;
+  tasks: any;
+  tags: string[];
+  monitor_interval: number;
+  upload_interval: number;
+  time_spent: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Organization {
+  _id: string;
+  name: string;
+  projects?: Project[];
+  monitor_interval: number;
+  upload_interval: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Hackathon {
+  _id: string;
+  name: string;
+  description: string;
+  banner_url: string;
+  organization: Organization;
+  project: Project;
+  start_time: string;
+  end_time: string;
+  created_at: string;
+  updated_at: string;
 }

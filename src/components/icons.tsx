@@ -1,4 +1,7 @@
 import {
+  GalleryVerticalEnd,
+  LayoutGrid,
+  
   AlarmClock,
   AlertTriangle,
   ArrowDown,
@@ -64,6 +67,8 @@ import {
 // export type Icon = LucideIcon
 
 export const Icons = {
+  history: GalleryVerticalEnd,
+  home: LayoutGrid,
   sun: SunMedium,
   moon: Moon,
   star: Star,
@@ -123,20 +128,9 @@ export const Icons = {
   shoes: Footprints,
   accessories: HardHat,
   logo: (props: LucideProps) => (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      strokeWidth="1.5"
-      stroke="currentColor"
-      fill="none"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      {...props}
-    >
-      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-      <circle cx="7" cy="15" r="2" />
-      <circle cx="17" cy="15" r="2" />
-      <path d="M3 9a2 1 0 0 0 2 1h14a2 1 0 0 0 2 -1" />
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="none" {...props} >
+      <path d="M119 92L187.416 179.75H50.584L119 92Z" fill="#2196D9" />
+      <path d="M119 141L50.584 53.25L187.416 53.25L119 141Z" fill="#2196D9" />
     </svg>
   ),
   nextjs: (props: LucideProps) => (
